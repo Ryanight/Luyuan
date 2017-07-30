@@ -10,10 +10,12 @@ import UIKit
 import CoreLocation
 
 class ViewController: UIViewController,CLLocationManagerDelegate {
+    
     let locationManager:CLLocationManager = CLLocationManager()
     
     @IBOutlet weak var label1: UILabel!
-    @IBOutlet weak var Switch1: UISwitch!
+    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var label3: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,14 +40,18 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let targetLocation = CLLocation(latitude: 52.105526, longitude: 51.141151)
         //获取最新的坐标
         let currLocation:CLLocation = locations.last!
         print(currLocation)
+        let distance:CLLocationDistance = currLocation.distance(from: targetLocation)
         //获取经度
         label1.text = "经度: \(currLocation.coordinate.longitude)"
         print(currLocation.coordinate.longitude)
         //获取纬度
-        //       newLabel.text = "纬度：\(currLocation.coordinate.latitude)"
+        label2.text = "纬度：\(currLocation.coordinate.latitude)"
+        //获取距离
+        label3.text = "距离: \(distance)"
         //        //获取海拔
         //        newLabel.text = "海拔：\(currLocation.altitude)"
         //        //获取水平精度
